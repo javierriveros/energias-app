@@ -1,73 +1,70 @@
 <template>
   <div>
+    <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-4xl text-teal-700 font-mono text-center mb-3">Cálculo de cables</h2>
     <form class="w-full" @submit.prevent="calculate">
       <div class="flex flex-wrap md:-mx-3 mb-2">
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="largo"
-          >Largo (m)</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="largo"
-            type="number"
-            placeholder="Largo del cable"
-            v-model="largo"
-          />
+          <label class="block">
+            <span class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Largo (m)</span>
+            <input
+              class="form-input mt-1 block w-full"
+              type="number"
+              placeholder="Largo del cable"
+              v-model="largo"
+            />
+          </label>
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="voltaje"
-          >Voltaje (V)</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="voltaje"
-            type="number"
-            placeholder="Voltaje"
-            v-model="voltaje"
-          />
+          <label class="block">
+            <span class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Voltaje (V)</span>
+            <input
+              class="form-input mt-1 block w-full"
+              type="number"
+              placeholder="Voltaje"
+              v-model="voltaje"
+            />
+          </label>
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="potencia"
-          >Demanda máxima (kW)</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="potencia"
-            type="number"
-            placeholder="Potencia requerida"
-            v-model="potencia"
-          />
+          <label class="block">
+            <span
+              class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            >Demanda máxima (kW)</span>
+            <input
+              class="form-input mt-1 block w-full"
+              type="number"
+              placeholder="Potencia requerida"
+              v-model="potencia"
+            />
+          </label>
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="tension"
-          >Caída de tensión (%)</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="tension"
-            type="number"
-            min="1"
-            max="5"
-            placeholder="Potencia requerida"
-            v-model="tension"
-          />
+          <label class="block">
+            <span
+              class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            >Caída de tensión (%)</span>
+            <input
+              class="form-input mt-1 block w-full"
+              type="number"
+              min="1"
+              max="5"
+              placeholder="Potencia requerida"
+              v-model="tension"
+            />
+          </label>
         </div>
         <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="temperatura"
-          >Temperatura (°C)</label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="temperatura"
-            type="number"
-            placeholder="Potencia requerida"
-            v-model="temperatura"
-          />
+          <label class="block">
+            <span
+              class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            >Temperatura (°C)</span>
+            <input
+              class="form-input mt-1 block w-full"
+              type="number"
+              placeholder="Potencia requerida"
+              v-model="temperatura"
+            />
+          </label>
         </div>
         <fieldset class="w-full md:w-1/2 px-3 my-2">
           <legend
@@ -75,16 +72,11 @@
           >Número de tubos protectores</legend>
           <div class="flex flex-wrap -mx-2 mb-2">
             <div class="w-full md:w-1/2 px-2 mb-3 md:mb-2">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="tubosVerticales"
-              >Verticales</label>
-              <div class="relative">
-                <select
-                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="tubosVerticales"
-                  v-model="tubosVerticales"
-                >
+              <label class="block">
+                <span
+                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >Verticales</span>
+                <select class="form-select block w-full mt-1" v-model="tubosVerticales">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -92,32 +84,14 @@
                   <option value="5">5</option>
                   <option value="6">6</option>
                 </select>
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                >
-                  <svg
-                    class="fill-current h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                    />
-                  </svg>
-                </div>
-              </div>
+              </label>
             </div>
             <div class="w-full md:w-1/2 px-2 mb-3 md:mb-2">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="tubosHorizontales"
-              >Horizontales</label>
-              <div class="relative">
-                <select
-                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="tubosHorizontales"
-                  v-model="tubosHorizontales"
-                >
+              <label class="block">
+                <span
+                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >Horizontales</span>
+                <select class="form-select block w-full mt-1" v-model="tubosHorizontales">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -125,20 +99,7 @@
                   <option value="5">5</option>
                   <option value="6">6</option>
                 </select>
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                >
-                  <svg
-                    class="fill-current h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                    />
-                  </svg>
-                </div>
-              </div>
+              </label>
             </div>
           </div>
         </fieldset>
@@ -148,76 +109,42 @@
           >Datos del sistema</legend>
           <div class="flex flex-wrap -mx-2 mb-2">
             <div class="w-full md:w-1/2 px-2 mb-6 md:mb-2">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="sistema"
-              >Tipo de sistema</label>
-              <div class="relative">
-                <select
-                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="sistema"
-                  v-model="sistema"
-                >
+              <label class="block">
+                <span
+                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >Tipo de sistema</span>
+                <select class="form-select block w-full mt-1" v-model="sistema">
                   <option value="1">Monofásico</option>
                   <option value="2">Trifásico</option>
                 </select>
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                >
-                  <svg
-                    class="fill-current h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                    />
-                  </svg>
-                </div>
-              </div>
+              </label>
             </div>
             <div class="w-full md:w-1/2 px-2 mb-6 md:mb-2">
-              <label
-                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                for="aislante"
-              >Tipo de aislamiento</label>
-              <div class="relative">
-                <select
-                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="aislante"
-                  v-model="aislante"
-                >
+              <label class="block">
+                <span
+                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >Tipo de aislamiento</span>
+                <select class="form-select block w-full mt-1" v-model="aislante">
                   <option value="1">PVC - PET (mal cable)</option>
                   <option value="2">EPR - XLPE (buen cable)</option>
                 </select>
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                >
-                  <svg
-                    class="fill-current h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                    />
-                  </svg>
-                </div>
-              </div>
+              </label>
             </div>
           </div>
         </fieldset>
       </div>
-      <div class="sm:text-right mx-3 md:mx-0 text-center mb-4 ">
+      <div class="sm:text-right mx-3 md:mx-0 text-center mb-4">
         <button
           class="block bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline font-semibold text-white px-4 py-2 rounded-lg"
           type="submit"
         >Calcular</button>
       </div>
     </form>
-    <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl leading-tight text-center font-mono py-2">
+    <h3
+      class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl leading-tight text-center font-mono py-2"
+    >
       <span class="bg-teal-500 rounded-lg px-5 py-2 text-teal-900">
-      S = {{seccion}} mm<sup>2</sup>
+        S = <span class="mr-2">{{seccion}}</span>mm<sup>2</sup>
       </span>
     </h3>
   </div>
