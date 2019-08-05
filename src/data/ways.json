@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "description": "Conductores aislados dentro de tubos protectores en montaje superficial"
+  },
+  {
+    "id": 2,
+    "description": "Conductores aislados dentro de tubos protectores embutidos en pared o pisos"
+  },
+  {
+    "id": 3,
+    "description": "Conductores aislados dentro de tubos protectores en canaleta (abierta o ventilada)"
+  },
+  {
+    "id": 4,
+    "description": "Conductores uni o multipolares en conductos"
+  },
+  {
+    "id": 5,
+    "description": "Conductores aislados en canaletas (abiertas o cerradas)"
+  },
+  {
+    "id": 6,
+    "description": "Conductores aislados en molduras o rodones"
+  },
+  {
+    "id": 7,
+    "description": "Conductores uni o multipolares en espacios de construcción o fosos (Shaft)"
+  },
+  {
+    "id": 8,
+    "description": "Conductores uni o multipolares fijados en paredes"
+  },
+  {
+    "id": 9,
+    "description": "Conductores uni o multipolares en canaleta (abierta ó ventilada)"
+  },
+  {
+    "id": 10,
+    "description": "Conductores uni o multipolares en bandejas"
+  },
+  {
+    "id": 11,
+    "description": "Conductores uni o multipolares suspendidos en cable mensajero"
+  },
+  {
+    "id": 12,
+    "description": "Conductores aislados insyalados sobre aisladores"
+  },
+  {
+    "id": 13,
+    "description": "Conductores aislados en líneas aereas"
+  }
+]
