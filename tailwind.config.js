@@ -2,7 +2,7 @@ module.exports = {
   theme: {
     fontFamily: {
       'sans': ['"Noto Sans"'],
-      'mono': ['"SF Mono"'],
+      'mono': ['"IBM Plex Mono"'],
     },
     customForms: theme => ({
       default: {

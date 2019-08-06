@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppHeader title="Cálculo de cables"></AppHeader>
-    <form class="w-full" @submit.prevent="calculate">
-      <div class="flex flex-wrap md:-mx-3 mb-2">
+    <form @submit.prevent="calculate">
+      <div class="flex flex-wrap md:-mx-3 mb-2 w-full">
         <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Largo (m)</span>
