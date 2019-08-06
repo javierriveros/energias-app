@@ -156,7 +156,9 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import AppHeader from '@/components/AppHeader'
+
 export default {
   components: {
     AppHeader
@@ -215,7 +217,6 @@ export default {
         [500, 848, 750]
       ],
       tabla56: [
-        // {grados: 10, pvc: 1.22, epr: 1.15}
         [10, 1.22, 1.15],
         [15, 1.17, 1.12],
         [20, 1.12, 1.08],
@@ -240,25 +241,6 @@ export default {
         [0.79, 0.75, 0.71, 0.7, 0.69, 0.68]
       ],
       tabla517: [
-        //  [1.0, 34, 29, 34, 34, 29.50],
-//         [1.5, 23, 20, 23, 23, 19.86],
-//         [2.5, 14, 12, 14, 14, 12.33],
-//         [4, 8.7, 7.5, 8.7, 9, 7.82],
-//         [6, 5.8, 5.1, 5.8, 6.18, 5.35],
-//         [10, 3.5, 3, 3.5, 3.84, 3.33],
-//         [16, 3.31, 1.96, 3.31, 2.57, 2.22],
-//         [25, 1.52, 1.28, 1.52, 1.76, 1.52],
-//         [35, 1.12, 0.96, 1.12, 1.36, 1.18],
-//         [50, 0.82, 0.73, 0.82, 1.09, 0.95],
-//         [70, 0.63, 0.54, 0.63, 0.86, 0.74],
-//         [95, 0.49, 0.42, 0.49, 0.70, 0.62],
-//         [120, 0.41, 0.35, 0.42, 0.62, 0.54],
-//         [150, 0.36, 0.31, 0.37, 0.56, 0.48],
-//         [185, 0.32, 0.27, 0.33, 0.50, 0.44],
-//         [240, 0.26, 0.23, 0.28, 0.45, 0.39],
-//         [300, 0.23, 0.2, 0.24, 0.40, 0.35],
-//         [400, 0.2, 0.18, 0.22, 0.37, 0.32],
-//         [500, 0.19, 0.16, 0.2, 0.34, 0.29]
         [1.0, 34, 29, 34],
         [1.5, 23, 20, 23],
         [2.5, 14, 12, 14],
@@ -313,10 +295,16 @@ export default {
         // Caída de tensión
         let k = this.tabla517.filter(t => t[0] == seccion1)[0][parseInt(this.sistema)];
         let dv = k * i * (this.largo / 1000);
-        if (dv <= percent)
+        if (dv <= percent) {
           this.seccion = seccion1;
-        else
-          alert('El cable está mal')
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'El cable está mal',
+            type: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+        }
       }
     },
     getFa() {
@@ -329,7 +317,12 @@ export default {
           parseInt(this.aislante)
         ];
       } else {
-        alert('No se puede hacer el cálculo');
+        Swal.fire({
+          title: '¡Error!',
+          text: 'No se puede hacer el cálculo',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
         return 0;
       }
     },
@@ -340,7 +333,12 @@ export default {
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
-        alert('No se puede hacer el cálculo');
+        Swal.fire({
+          title: '¡Error!',
+          text: 'No se puede hacer el cálculo',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
         return 0;
       }
     },
@@ -352,7 +350,12 @@ export default {
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
-        alert('No se puede hacer el cálculo');
+        Swal.fire({
+          title: '¡Error!',
+          text: 'No se puede hacer el cálculo',
+          type: 'error',
+          confirmButtonText: 'Aceptar'
+        });
         return 0;
       }
     }
