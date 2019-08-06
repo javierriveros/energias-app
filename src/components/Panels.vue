@@ -1,3 +1,14 @@
 <template>
-  <h1>Paneles</h1>
+  <div>
+    <AppHeader title="Cálculo de paneles solares"></AppHeader>
+  </div>
 </template>
+
+<script>
+import AppHeader from '@/components/AppHeader'
+export default {
+  components: {
+    AppHeader
+  }
+}
+</script>

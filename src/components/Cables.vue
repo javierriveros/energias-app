@@ -1,47 +1,50 @@
 <template>
   <div>
-    <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-4xl text-teal-700 font-mono text-center mb-3">Cálculo de cables</h2>
+    <AppHeader title="Cálculo de cables"></AppHeader>
     <form class="w-full" @submit.prevent="calculate">
       <div class="flex flex-wrap md:-mx-3 mb-2">
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
-            <span class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Largo (m)</span>
+            <span class="form-label">Largo (m)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
+              min="0"
               placeholder="Largo del cable"
               v-model="largo"
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
-            <span class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Voltaje (V)</span>
+            <span class="form-label">Voltaje (V)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
+              min="0"
               placeholder="Voltaje"
               v-model="voltaje"
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span
-              class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="form-label"
             >Demanda máxima (kW)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
+              min="0"
               placeholder="Potencia requerida"
               v-model="potencia"
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span
-              class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="form-label"
             >Caída de tensión (%)</span>
             <input
               class="form-input mt-1 block w-full"
@@ -53,28 +56,29 @@
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span
-              class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="form-label"
             >Temperatura (°C)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
+              min="0"
               placeholder="Potencia requerida"
               v-model="temperatura"
             />
           </label>
         </div>
-        <fieldset class="w-full md:w-1/2 px-3 my-2">
+        <fieldset class="w-full md:w-1/2 px-3 sm:px-0 md:px-3 my-2">
           <legend
-            class="w-full text-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            class="w-full text-center form-label"
           >Número de tubos protectores</legend>
           <div class="flex flex-wrap -mx-2 mb-2">
             <div class="w-full md:w-1/2 px-2 mb-3 md:mb-2">
               <label class="block">
                 <span
-                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  class="form-label"
                 >Verticales</span>
                 <select class="form-select block w-full mt-1" v-model="tubosVerticales">
                   <option value="1">1</option>
@@ -89,7 +93,7 @@
             <div class="w-full md:w-1/2 px-2 mb-3 md:mb-2">
               <label class="block">
                 <span
-                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  class="form-label"
                 >Horizontales</span>
                 <select class="form-select block w-full mt-1" v-model="tubosHorizontales">
                   <option value="1">1</option>
@@ -103,26 +107,27 @@
             </div>
           </div>
         </fieldset>
-        <fieldset class="w-full md:w-1/2 px-3 my-2">
+        <fieldset class="w-full md:w-1/2 px-3 sm:px-0 md:px-3 my-2">
           <legend
-            class="w-full text-center uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            class="w-full text-center form-label"
           >Datos del sistema</legend>
           <div class="flex flex-wrap -mx-2 mb-2">
-            <div class="w-full md:w-1/2 px-2 mb-6 md:mb-2">
+            <div class="w-full md:w-1/2 px-2  mb-6 md:mb-2">
               <label class="block">
                 <span
-                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  class="form-label"
                 >Tipo de sistema</span>
                 <select class="form-select block w-full mt-1" v-model="sistema">
                   <option value="1">Monofásico</option>
                   <option value="2">Trifásico</option>
+                  <option value="3">Electroductos magnéticos</option>
                 </select>
               </label>
             </div>
             <div class="w-full md:w-1/2 px-2 mb-6 md:mb-2">
               <label class="block">
                 <span
-                  class="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  class="form-label"
                 >Tipo de aislamiento</span>
                 <select class="form-select block w-full mt-1" v-model="aislante">
                   <option value="1">PVC - PET (mal cable)</option>
@@ -133,7 +138,7 @@
           </div>
         </fieldset>
       </div>
-      <div class="sm:text-right mx-3 md:mx-0 text-center mb-4">
+      <div class="sm:text-right mx-3 sm:mx-0 text-center mb-4">
         <button
           class="block bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline font-semibold text-white px-4 py-2 rounded-lg"
           type="submit"
@@ -151,7 +156,11 @@
 </template>
 
 <script>
+import AppHeader from '@/components/AppHeader'
 export default {
+  components: {
+    AppHeader
+  },
   data() {
     return {
       potencia: 15,
@@ -231,6 +240,25 @@ export default {
         [0.79, 0.75, 0.71, 0.7, 0.69, 0.68]
       ],
       tabla517: [
+        //  [1.0, 34, 29, 34, 34, 29.50],
+//         [1.5, 23, 20, 23, 23, 19.86],
+//         [2.5, 14, 12, 14, 14, 12.33],
+//         [4, 8.7, 7.5, 8.7, 9, 7.82],
+//         [6, 5.8, 5.1, 5.8, 6.18, 5.35],
+//         [10, 3.5, 3, 3.5, 3.84, 3.33],
+//         [16, 3.31, 1.96, 3.31, 2.57, 2.22],
+//         [25, 1.52, 1.28, 1.52, 1.76, 1.52],
+//         [35, 1.12, 0.96, 1.12, 1.36, 1.18],
+//         [50, 0.82, 0.73, 0.82, 1.09, 0.95],
+//         [70, 0.63, 0.54, 0.63, 0.86, 0.74],
+//         [95, 0.49, 0.42, 0.49, 0.70, 0.62],
+//         [120, 0.41, 0.35, 0.42, 0.62, 0.54],
+//         [150, 0.36, 0.31, 0.37, 0.56, 0.48],
+//         [185, 0.32, 0.27, 0.33, 0.50, 0.44],
+//         [240, 0.26, 0.23, 0.28, 0.45, 0.39],
+//         [300, 0.23, 0.2, 0.24, 0.40, 0.35],
+//         [400, 0.2, 0.18, 0.22, 0.37, 0.32],
+//         [500, 0.19, 0.16, 0.2, 0.34, 0.29]
         [1.0, 34, 29, 34],
         [1.5, 23, 20, 23],
         [2.5, 14, 12, 14],
@@ -243,13 +271,13 @@ export default {
         [50, 0.82, 0.73, 0.82],
         [70, 0.63, 0.54, 0.63],
         [95, 0.49, 0.42, 0.49],
-        [120, 0.41, 0.35, 0.41],
-        [150, 0.36, 0.31, 0.36],
-        [185, 0.32, 0.27, 0.32],
-        [240, 0.26, 0.23, 0.26],
-        [300, 0.23, 0.2, 0.23],
-        [400, 0.2, 0.18, 0.2],
-        [500, 0.19, 0.16, 0.19]
+        [120, 0.41, 0.35, 0.42],
+        [150, 0.36, 0.31, 0.37],
+        [185, 0.32, 0.27, 0.33],
+        [240, 0.26, 0.23, 0.28],
+        [300, 0.23, 0.2, 0.24],
+        [400, 0.2, 0.18, 0.22],
+        [500, 0.19, 0.16, 0.21]
       ],
       seccion: 0
     };
@@ -259,11 +287,12 @@ export default {
       let i =
         (this.potencia * 1000) /
         ((this.sistema == "2" ? Math.sqrt(3) : 1) * this.voltaje * 0.9);
+      let percent = this.voltaje * (this.tension / 100);
 
       // Como L > a 40 m. Se hace por caída de tensión y se verifica por capacidad de conducción
       if (this.largo > 40) {
         // Caída de tensión
-        let percent = this.voltaje * (this.tension / 100);
+        
         let k = percent / ((i * this.largo) / 1000);
         let seccion1 = this.getSFrom517(k);
 
@@ -281,30 +310,49 @@ export default {
         let ft = this.getFt();
         let di = i / (fa * ft);
         let seccion1 = this.getSFrom5354(di);
-        this.seccion = seccion1;
         // Caída de tensión
+        let k = this.tabla517.filter(t => t[0] == seccion1)[0];
+        let dv = k * i * (this.largo / 1000);
+        if (dv < percent) 
+        this.seccion = seccion1;
       }
     },
     getFa() {
       return this.tabla59[this.tubosVerticales - 1][this.tubosHorizontales - 1];
     },
     getFt() {
-      return this.tabla56.filter(t => t[0] == this.temperatura)[0][
-        parseInt(this.aislante)
-      ];
+      let temp = this.tabla56.filter(t => t[0] == this.temperatura)
+      if (temp[0]) {
+        return temp[0][
+          parseInt(this.aislante)
+        ];
+      } else {
+        alert('No se puede hacer el cálculo');
+        return 0;
+      }
     },
     getSFrom517(k) {
       let filteredTable = this.tabla517.filter(
         t => t[parseInt(this.sistema)] <= k
       );
-      return filteredTable[0][0];
+      if (filteredTable[0]) {
+        return filteredTable[0][0];
+      } else {
+        alert('No se puede hacer el cálculo');
+        return 0;
+      }
     },
     getSFrom5354(di) {
       let filteredTable =
         this.aislante == "1"
           ? this.tabla53.filter(t => t[this.aislante] >= di)
           : this.tabla54.filter(t => t[this.aislante] >= di);
-      return filteredTable[0][0];
+      if (filteredTable[0]) {
+        return filteredTable[0][0];
+      } else {
+        alert('No se puede hacer el cálculo');
+        return 0;
+      }
     }
   }
 };

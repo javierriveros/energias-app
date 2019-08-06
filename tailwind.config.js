@@ -9,6 +9,7 @@ module.exports = {
         'input, select': {
           borderRadius: theme('borderRadius.lg'),
           backgroundColor: theme('colors.gray.200'),
+          boxShadow: theme('boxShadow.sm'),
           '&:focus': {
             backgroundColor: theme('colors.white'),
             outline: 0

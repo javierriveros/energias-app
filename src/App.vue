@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar />
+    <!-- <navbar /> -->
     <div class="container mx-auto py-4">
       <router-view></router-view>
     </div>
