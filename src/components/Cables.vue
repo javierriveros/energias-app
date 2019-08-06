@@ -311,10 +311,12 @@ export default {
         let di = i / (fa * ft);
         let seccion1 = this.getSFrom5354(di);
         // Caída de tensión
-        let k = this.tabla517.filter(t => t[0] == seccion1)[0];
+        let k = this.tabla517.filter(t => t[0] == seccion1)[0][parseInt(this.sistema)];
         let dv = k * i * (this.largo / 1000);
-        if (dv < percent) 
-        this.seccion = seccion1;
+        if (dv <= percent)
+          this.seccion = seccion1;
+        else
+          alert('El cable está mal')
       }
     },
     getFa() {
