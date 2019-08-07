@@ -165,15 +165,15 @@ export default {
   },
   data() {
     return {
-      potencia: 15,
-      voltaje: 380,
+      potencia: 30,
+      voltaje: 208,
       largo: 40,
-      aislante: 2,
+      aislante: 1,
       tension: 3,
-      temperatura: 40,
+      temperatura: 45,
       sistema: 2,
       tubosHorizontales: 1,
-      tubosVerticales: 4,
+      tubosVerticales: 3,
       tabla53: [
         [1.0, 13.5, 12],
         [1.5, 17.5, 15.5],
@@ -279,22 +279,29 @@ export default {
         let seccion1 = this.getSFrom517(k);
 
         // Capacidad de conducción
+        // Factor de corrección por agrupamiento
         let fa = this.getFa();
+        // Factor de corrección por temperatura
         let ft = this.getFt();
         let di = i / (fa * ft);
         let seccion2 = this.getSFrom5354(di);
+        // Se escoge la sección más grande
         if (seccion1 > seccion2) this.seccion = seccion1;
         else this.seccion = seccion2;
       } else {
         // Como L <= a 40 m. Se hace por capacidad de conducción y se verifica por caída de tensión
         // Capacidad de conducción
+        // Factor de corrección por agrupamiento
         let fa = this.getFa();
+        // Factor de corrección por temperatura
         let ft = this.getFt();
         let di = i / (fa * ft);
         let seccion1 = this.getSFrom5354(di);
         // Caída de tensión
         let k = this.tabla517.filter(t => t[0] == seccion1)[0][parseInt(this.sistema)];
         let dv = k * i * (this.largo / 1000);
+
+        // Si el voltaje permitido es menor al porcentaje caída de tensión del voltaje
         if (dv <= percent) {
           this.seccion = seccion1;
         } else {
@@ -345,8 +352,8 @@ export default {
     getSFrom5354(di) {
       let filteredTable =
         this.aislante == "1"
-          ? this.tabla53.filter(t => t[this.aislante] >= di)
-          : this.tabla54.filter(t => t[this.aislante] >= di);
+          ? this.tabla53.filter(t => t[parseInt(this.sistema)] >= di + 2)
+          : this.tabla54.filter(t => t[parseInt(this.sistema)] >= di + 2);
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
