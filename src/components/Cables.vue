@@ -1,8 +1,11 @@
 <template>
   <div>
-    <AppHeader title="Cálculo de cables"></AppHeader>
+    <AppHeader
+      title="Cálculo de cables"
+      @showHelp="handleShowHelp"
+    ></AppHeader>
     <form @submit.prevent="calculate">
-      <div class="flex flex-wrap md:-mx-3 mb-2 w-full">
+      <div class="flex flex-wrap items-center md:-mx-3 mb-0">
         <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Largo (m)</span>
@@ -297,12 +300,9 @@ export default {
         if (dv <= percent) {
           this.seccion = seccion1;
         } else {
-          Swal.fire({
-            title: '¡Error!',
-            text: 'El cable está mal',
-            type: 'error',
-            confirmButtonText: 'Aceptar'
-          })
+          this.showErrorMessage(
+            'El cable está mal'
+          );
         }
       }
     },
@@ -316,12 +316,9 @@ export default {
           parseInt(this.aislante)
         ];
       } else {
-        Swal.fire({
-          title: '¡Error!',
-          text: 'No se puede hacer el cálculo',
-          type: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+        this.showErrorMessage(
+          'No se puede hacer el cálculo'
+        );
         return 0;
       }
     },
@@ -332,12 +329,9 @@ export default {
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
-        Swal.fire({
-          title: '¡Error!',
-          text: 'No se puede hacer el cálculo',
-          type: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+        this.showErrorMessage(
+          'No se puede hacer el cálculo'
+        );
         return 0;
       }
     },
@@ -349,17 +343,30 @@ export default {
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
-        Swal.fire({
-          title: '¡Error!',
-          text: 'No se puede hacer el cálculo',
-          type: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+        this.showErrorMessage(
+          'No se puede hacer el cálculo'
+        );
         return 0;
       }
     },
-    isBadCable() {
+    isBadCable () {
       return this.aislante == "1";
+    },
+    showErrorMessage (msg) {
+      Swal.fire({
+        title: "¡Error!",
+        text: msg,
+        type: "error",
+        confirmButtonText: "Aceptar"
+      });
+    },
+    handleShowHelp () {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'No se puede hacer el cálculo',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
   }
 };

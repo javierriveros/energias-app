@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppHeader title="Cálculo de demanda máxima"></AppHeader>
+    <AppHeader title="Cálculo de demanda máxima" @showHelp="handleShowHelp"></AppHeader>
     <form class="w-full" @submit.prevent="calculate">
       <div class="flex flex-wrap items-center md:-mx-3 mb-2">
         <div class="w-full px-3 sm:px-0 md:px-3 mb-6">
@@ -185,6 +185,11 @@ export default {
         type: "error",
         confirmButtonText: "Aceptar"
       });
+    },
+    handleShowHelp() {
+      this.showErrorMessage(
+        "No se puede agregar un nuevo cuarto sin haber rellenado el actual."
+      );
     }
   }
 };
