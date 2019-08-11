@@ -68,9 +68,17 @@ export default {
       });
     },
     handleShowHelp() {
-      this.showErrorMessage(
-        "No se puede agregar un nuevo cuarto sin haber rellenado el actual."
-      );
+      Swal.fire({
+        title: "Ayuda",
+        html: `<p class="text-left">Para realizar el cálculo de la sección del cable tenga en cuenta:<br>
+              - El tiempo de autonomía del sistema.<br>
+              - La potencia máxima que proveerá.<br>
+              Luego el programa mostrará:<br>
+              - Las características del regulador.<br>
+              - Las características del inversor.<br>
+              - Las características de las baterías.<br>`,
+        confirmButtonText: "Aceptar"
+      });
     }
   }
 };

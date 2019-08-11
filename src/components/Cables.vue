@@ -362,10 +362,19 @@ export default {
     },
     handleShowHelp () {
       Swal.fire({
-        title: '¡Error!',
-        text: 'No se puede hacer el cálculo',
-        type: 'error',
-        confirmButtonText: 'Aceptar'
+        title: "Ayuda",
+        html: `<p class="text-left">Para realizar el cálculo de la sección del cable tenga en cuenta:<br>
+              - El largo del cable.<br>
+              - El voltaje máximo que este soportará.<br>
+              - La demanda máxima (proveer el valor en kilovatios).
+              - El porcentaje de caída de tensión, máximo 5%.<br>
+              - La temperatura que soportará el cable una vez instalado.<br>
+              - El número de tubos protectores instalados tanto verticales como horizontales para determinar el factor de agrupamiento.<br>
+              - El tipo de sistema usado: monofásico, trifásico o electroductos magnéticos.<br>
+              - El tipo de aislamiento que tendrá el cable (PVC, PET) o (EPR, XLPE).<br>
+              Luego el programa mostrará:<br>
+              - La sección del cable adecuada`,
+        confirmButtonText: "Aceptar"
       });
     }
   }

@@ -165,7 +165,7 @@ export default {
         room => room.width === 0 || room.heightL === 0
       );
       if (checkEmptyrooms.length >= 1 && this.rooms.length > 0) {
-        this.showErrorMessage(
+        this.showMessage(
           "No se puede agregar un nuevo cuarto sin haber rellenado el actual."
         );
         return;
@@ -178,18 +178,26 @@ export default {
     removeRoom(roomId) {
       if (this.canRemoveRoom) this.rooms.splice(roomId, 1);
     },
-    showErrorMessage(msg) {
+    showMessage(msg, type="error") {
       Swal.fire({
-        title: "¡Error!",
+        title: type == "error" ? "¡Error!" : "Información",
         text: msg,
-        type: "error",
+        type: type,
         confirmButtonText: "Aceptar"
       });
     },
     handleShowHelp() {
-      this.showErrorMessage(
-        "No se puede agregar un nuevo cuarto sin haber rellenado el actual."
-      );
+      Swal.fire({
+        title: "Ayuda",
+        html: `<p class="text-left">Para realizar el cálculo de la demanda máxima tenga en cuenta:<br>
+              - La superficie máxima del lugar en donde se realizará la instalación.<br>
+              - Los diferentes cuartos o "cuadrados" que hay.<br><br>
+              Luego el programa mostrará:<br>
+              - Cuantos bombillos necesita instalar.<br>
+              - Cuantas tomas de corriente necesita instalar.<br>
+              - Cuantos aires acondicionados y otros aparatos de uso común puede instalar adicionalmente.</p>`,
+        confirmButtonText: "Aceptar"
+      });
     }
   }
 };
