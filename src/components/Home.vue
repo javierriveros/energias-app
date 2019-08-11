@@ -25,7 +25,7 @@
             </a>
             <div class="px-6 py-4 text-center">
               <div class="font-bold text-xl mb-2">Paneles solares</div>
-              <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet</p>
+              <p class="text-gray-700 text-base">Realice el cálculo de una instalación fotovoltaica</p>
             </div>
           </router-link>
         </div>

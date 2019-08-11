@@ -2,116 +2,42 @@
   <div>
     <AppHeader title="Cálculo de paneles solares"></AppHeader>
     <form class="w-full" @submit.prevent="calculate">
-      <div class="flex flex-wrap items-center md:-mx-3 mb-2">
+      <div class="flex flex-wrap items-center md:-mx-3 mb-0">
         <div class="w-full md:w-1/2 px-3 sm:px-0 md:px-3 mb-6">
           <label class="block">
-            <span class="form-label">Superficie máxima (m<sup>2</sup>)</span>
+            <span class="form-label">Tiempo conectado (h)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
-              placeholder="Superfice"
-              v-model="maxSurface"
+              placeholder="Tiempo"
+              v-model="timeConnected"
             />
           </label>
         </div>
         <div class="w-full md:w-1/2 px-3 sm:px-0 md:px-3 mb-6">
           <label class="block">
-            <span class="form-label">Superficie máxima (m<sup>2</sup>)</span>
+            <span class="form-label">Potencia máxima (kW)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
-              placeholder="Superfice"
-              v-model="maxSurface"
+              placeholder="Potencia"
+              v-model="power"
             />
           </label>
         </div>
       </div>
-      <fieldset class="w-full md:w-1/2 sm:px-0 my-2">
-          <legend
-            class="w-full text-center form-label"
-          >Cuartos</legend>
-      <div
-        v-for="(room, index) in rooms"
-        v-bind:key="index"
-        class="flex flex-wrap items-center md:-mx-3 mb-2"
-      >
-        <div class="w-full border-b border-1 mx-3 pb-2 form-label">
-          Cuarto {{index+1}}
-        </div>
-        <div class="w-full md:flex-1 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
-          <label class="block">
-            <span class="form-label">Ancho (m)</span>
-            <input
-              class="form-input mt-1 block w-full"
-              type="number"
-              placeholder="Ancho"
-              v-model="room.width"
-            />
-          </label>
-        </div>
-        <div class="w-full md:flex-1 px-3 sm:px-0 md:px-3 mb-3 md:mb-2">
-          <label class="block">
-            <span class="form-label">Largo (m)</span>
-            <input
-              class="form-input mt-1 block w-full"
-              type="number"
-              placeholder="Largo"
-              v-model="room.heightL"
-            />
-          </label>
-        </div>
-        <div class="px-3 sm:px-0 md:px-3 pt-2 md:pt-5 items-center flex">
-          <button
-            @click="removeRoom(index)"
-            type="button"
-            class="bg-red-500 hover:bg-red-400 mr-2 focus:outline-none focus:shadow-outline font-semibold text-white px-2 py-2 rounded-lg"
-          >
-            <svg
-              class="fill-current w-5 h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-            >
-              <path
-                class="heroicon-ui"
-                d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"
-              />
-            </svg>
-          </button>
-          <button
-            v-if="index + 1 === rooms.length"
-            @click="addRoom"
-            type="button"
-            class="block bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline font-semibold text-white px-2 py-2 rounded-lg"
-          >
-            <svg
-              class="fill-current w-5 h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-            >
-              <path
-                d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="sm:text-right mx-3 sm:mx-0 text-center mb-4">
+      <div class="mx-3 sm:mx-0">
         <button
           class="block bg-indigo-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline font-semibold text-white px-4 py-2 rounded-lg"
           type="submit"
         >Calcular</button>
       </div>
-      </fieldset>
     </form>
   </div>
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import AppHeader from "@/components/AppHeader";
 
 export default {
@@ -120,56 +46,19 @@ export default {
   },
   data() {
     return {
-      rooms: [],
-      maxSurface: 0,
-      canRemoveRoom: false,
-      table12: [
-        {level: 'min', lighting: 10, fluorLight: 6},
-        {level: 'mid', lighting: 15, fluorLight: 8},
-        {level: 'hig', lighting: 20, fluorLight: 10}
-      ]
+      timeConnected: 0,
+      power: 0
     };
-  },
-  watch: {
-    rooms() {
-      this.canRemoveRoom = this.rooms.length > 1;
-    },
-    maxSurface() {
-      // switch (this.maxSurface) {
-      //   case this.table12[0].level:
-      //     this.superfice = "Mínima";
-      //     break;
-      //   case this.table12[1].level:
-      //     this.superfice = "Media";
-      //     break;
-      //   case this.table12[2].level:
-      //     this.superfice = "Mínima";
-      //     break;
-      // }
-    }
   },
   methods: {
     calculate() {
-      // let sum = 0
-      // this.rooms.forEach(
-      //   s => sum += parseInt(s.width)
-      // )
-      // console.log(sum)
-    },
-    addRoom() {
-      // let checkEmptyrooms = this.rooms.filter(room => room.number === null);
-      // if (checkEmptyrooms.length >= 1 && this.rooms.length > 0) return;
-      this.rooms.push({
-        width: 0,
-        heightL: 0
+      Swal.fire({
+        title: "¡Error!",
+        text: "¡Error!",
+        type: "error",
+        confirmButtonText: "Aceptar"
       });
-    },
-    removeRoom(roomId) {
-      if (this.canRemoveRoom) this.rooms.splice(roomId, 1);
     }
-  },
-  mounted() {
-    this.addRoom();
   }
 };
 </script>

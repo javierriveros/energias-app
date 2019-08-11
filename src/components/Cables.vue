@@ -29,9 +29,7 @@
         </div>
         <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
-            <span
-              class="form-label"
-            >Demanda máxima (kW)</span>
+            <span class="form-label">Demanda máxima (kW)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
@@ -43,9 +41,7 @@
         </div>
         <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
-            <span
-              class="form-label"
-            >Caída de tensión (%)</span>
+            <span class="form-label">Caída de tensión (%)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
@@ -58,9 +54,7 @@
         </div>
         <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
-            <span
-              class="form-label"
-            >Temperatura (°C)</span>
+            <span class="form-label">Temperatura (°C)</span>
             <input
               class="form-input mt-1 block w-full"
               type="number"
@@ -71,16 +65,15 @@
           </label>
         </div>
         <fieldset class="w-full md:w-1/2 px-3 sm:px-0 md:px-3 my-2">
-          <legend
-            class="w-full text-center form-label"
-          >Número de tubos protectores</legend>
+          <legend class="w-full text-center form-label">Número de tubos protectores</legend>
           <div class="flex flex-wrap -mx-2 mb-2">
             <div class="w-full md:w-1/2 px-2 mb-3 md:mb-2">
               <label class="block">
-                <span
-                  class="form-label"
-                >Verticales</span>
-                <select class="form-select block w-full mt-1" v-model="tubosVerticales">
+                <span class="form-label">Verticales</span>
+                <select
+                  class="form-select block w-full mt-1"
+                  v-model="tubosVerticales"
+                >
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -92,10 +85,11 @@
             </div>
             <div class="w-full md:w-1/2 px-2 mb-3 md:mb-2">
               <label class="block">
-                <span
-                  class="form-label"
-                >Horizontales</span>
-                <select class="form-select block w-full mt-1" v-model="tubosHorizontales">
+                <span class="form-label">Horizontales</span>
+                <select
+                  class="form-select block w-full mt-1"
+                  v-model="tubosHorizontales"
+                >
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -108,16 +102,15 @@
           </div>
         </fieldset>
         <fieldset class="w-full md:w-1/2 px-3 sm:px-0 md:px-3 my-2">
-          <legend
-            class="w-full text-center form-label"
-          >Datos del sistema</legend>
+          <legend class="w-full text-center form-label">Datos del sistema</legend>
           <div class="flex flex-wrap -mx-2 mb-2">
             <div class="w-full md:w-1/2 px-2  mb-6 md:mb-2">
               <label class="block">
-                <span
-                  class="form-label"
-                >Tipo de sistema</span>
-                <select class="form-select block w-full mt-1" v-model="sistema">
+                <span class="form-label">Tipo de sistema</span>
+                <select
+                  class="form-select block w-full mt-1"
+                  v-model="sistema"
+                >
                   <option value="1">Monofásico</option>
                   <option value="2">Trifásico</option>
                   <option value="3">Electroductos magnéticos</option>
@@ -126,10 +119,11 @@
             </div>
             <div class="w-full md:w-1/2 px-2 mb-6 md:mb-2">
               <label class="block">
-                <span
-                  class="form-label"
-                >Tipo de aislamiento</span>
-                <select class="form-select block w-full mt-1" v-model="aislante">
+                <span class="form-label">Tipo de aislamiento</span>
+                <select
+                  class="form-select block w-full mt-1"
+                  v-model="aislante"
+                >
                   <option value="1">PVC - PET (mal cable)</option>
                   <option value="2">EPR - XLPE (buen cable)</option>
                 </select>
@@ -145,9 +139,7 @@
         >Calcular</button>
       </div>
     </form>
-    <h3
-      class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl leading-tight text-center font-mono py-2"
-    >
+    <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-5xl leading-tight text-center font-mono py-2">
       <span class="bg-teal-500 rounded-lg px-5 py-2 text-teal-900">
         S = <span class="mr-2">{{seccion}}</span>mm<sup>2</sup>
       </span>
@@ -163,7 +155,7 @@ export default {
   components: {
     AppHeader
   },
-  data() {
+  data () {
     return {
       potencia: 30,
       voltaje: 208,
@@ -265,7 +257,7 @@ export default {
     };
   },
   methods: {
-    calculate() {
+    calculate () {
       let i =
         (this.potencia * 1000) /
         ((this.sistema == "2" ? Math.sqrt(3) : 1) * this.voltaje * 0.9);
@@ -274,7 +266,7 @@ export default {
       // Como L > a 40 m. Se hace por caída de tensión y se verifica por capacidad de conducción
       if (this.largo > 40) {
         // Caída de tensión
-        
+
         let k = percent / ((i * this.largo) / 1000);
         let seccion1 = this.getSFrom517(k);
 
@@ -314,10 +306,10 @@ export default {
         }
       }
     },
-    getFa() {
+    getFa () {
       return this.tabla59[this.tubosVerticales - 1][this.tubosHorizontales - 1];
     },
-    getFt() {
+    getFt () {
       let temp = this.tabla56.filter(t => t[0] == this.temperatura)
       if (temp[0]) {
         return temp[0][
@@ -333,7 +325,7 @@ export default {
         return 0;
       }
     },
-    getSFrom517(k) {
+    getSFrom517 (k) {
       let filteredTable = this.tabla517.filter(
         t => t[parseInt(this.sistema)] <= k
       );
@@ -349,11 +341,11 @@ export default {
         return 0;
       }
     },
-    getSFrom5354(di) {
+    getSFrom5354 (di) {
       let filteredTable =
-        this.aislante == "1"
-          ? this.tabla53.filter(t => t[parseInt(this.sistema)] >= di + 2)
-          : this.tabla54.filter(t => t[parseInt(this.sistema)] >= di + 2);
+        this.isBadCable()
+          ? this.tabla53.filter(t => t[parseInt(this.sistema) > 2 ? 1 : 2] >= di + 2)
+          : this.tabla54.filter(t => t[parseInt(this.sistema) > 2 ? 1 : 2] >= di + 2);
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
@@ -365,6 +357,9 @@ export default {
         });
         return 0;
       }
+    },
+    isBadCable() {
+      return this.aislante == "1";
     }
   }
 };
