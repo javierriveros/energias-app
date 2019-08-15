@@ -4,6 +4,7 @@ import Demand from '@/components/Demand';
 import DemandBuildings from '@/components/DemandBuildings';
 import DemandPublic from '@/components/DemandPublic';
 import Panels from '@/components/Panels';
+import About from '@/components/About';
 
 export const routes = [
   {
@@ -35,5 +36,10 @@ export const routes = [
     path: '/paneles',
     name: 'panels',
     component: Panels
-  }
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
+  },
 ]

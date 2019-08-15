@@ -1,6 +1,7 @@
 {
   "name": "energias-app",
   "version": "0.1.0",
+  "author": "Javier Riveros <walter.riveros@unillanos.edu.co>",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
