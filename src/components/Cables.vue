@@ -6,7 +6,7 @@
     ></AppHeader>
     <form @submit.prevent="calculate">
       <div class="flex flex-wrap items-center md:-mx-3 mb-0">
-        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/4 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Largo (m)</span>
             <input
@@ -18,7 +18,7 @@
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
+        <!-- <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Voltaje (V)</span>
             <input
@@ -29,8 +29,8 @@
               v-model="voltaje"
             />
           </label>
-        </div>
-        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
+        </div> -->
+        <div class="w-full md:w-1/4 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Demanda máxima (kW)</span>
             <input
@@ -42,7 +42,7 @@
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/4 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Caída de tensión (%)</span>
             <input
@@ -55,7 +55,7 @@
             />
           </label>
         </div>
-        <div class="w-full md:w-1/5 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
+        <div class="w-full md:w-1/4 px-3 sm:px-0 md:px-3 mb-6 md:mb-2">
           <label class="block">
             <span class="form-label">Temperatura (°C)</span>
             <input
@@ -161,7 +161,6 @@ export default {
   data () {
     return {
       potencia: 30,
-      voltaje: 208,
       largo: 40,
       aislante: 1,
       tension: 3,
@@ -263,8 +262,8 @@ export default {
     calculate () {
       let i =
         (this.potencia * 1000) /
-        ((this.sistema == "2" ? Math.sqrt(3) : 1) * this.voltaje * 0.9);
-      let percent = this.voltaje * (this.tension / 100);
+        ((this.sistema == "2" ? Math.sqrt(3) : 1) * this.getVoltaje() * 0.9);
+      let percent = this.getVoltaje() * (this.tension / 100);
 
       // Como L > a 40 m. Se hace por caída de tensión y se verifica por capacidad de conducción
       if (this.largo > 40) {
@@ -306,18 +305,22 @@ export default {
         }
       }
     },
+    getVoltaje () {
+      // return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 120 : 208; // Colombia
+      return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 220 : 380; // Europa
+    },
     getFa () {
       return this.tabla59[this.tubosVerticales - 1][this.tubosHorizontales - 1];
     },
     getFt () {
-      let temp = this.tabla56.filter(t => t[0] == this.temperatura)
+      let temp = this.tabla56.filter(t => t[0] >= this.temperatura)
       if (temp[0]) {
         return temp[0][
           parseInt(this.aislante)
         ];
       } else {
         this.showErrorMessage(
-          'No se puede hacer el cálculo'
+          'No se puede hacer el cálculo. La temperatura dada no es permitida.'
         );
         return 0;
       }
@@ -330,7 +333,7 @@ export default {
         return filteredTable[0][0];
       } else {
         this.showErrorMessage(
-          'No se puede hacer el cálculo'
+          'No se puede hacer el cálculo. La sección requerida no está permitida.'
         );
         return 0;
       }
@@ -338,19 +341,22 @@ export default {
     getSFrom5354 (di) {
       let filteredTable =
         this.isBadCable()
-          ? this.tabla53.filter(t => t[parseInt(this.sistema) > 2 ? 1 : 2] >= di + 2)
-          : this.tabla54.filter(t => t[parseInt(this.sistema) > 2 ? 1 : 2] >= di + 2);
+          ? this.tabla53.filter(t => t[this.getSistema()] >= di + 2)
+          : this.tabla54.filter(t => t[this.getSistema()] >= di + 2);
       if (filteredTable[0]) {
         return filteredTable[0][0];
       } else {
         this.showErrorMessage(
-          'No se puede hacer el cálculo'
+          'No se puede hacer el cálculo. La sección requerida no está permitida en las tablas 5.3a y 5.4a.'
         );
         return 0;
       }
     },
     isBadCable () {
       return this.aislante == "1";
+    },
+    getSistema () {
+      return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 1 : 2;
     },
     showErrorMessage (msg) {
       Swal.fire({
