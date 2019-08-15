@@ -269,7 +269,7 @@ export default {
       if (this.largo > 40) {
         // Caída de tensión
 
-        let k = percent / ((i * this.largo) / 1000);
+        let k = percent / (i * (this.largo / 1000));
         let seccion1 = this.getSFrom517(k);
 
         // Capacidad de conducción
@@ -299,6 +299,10 @@ export default {
         if (dv <= percent) {
           this.seccion = seccion1;
         } else {
+          percent = percent - 0.1;
+          k = percent / (i * (this.largo / 1000));
+          this.seccion = this.getSFrom517(k);
+          // Buscar una S mayor
           this.showErrorMessage(
             'El cable está mal'
           );

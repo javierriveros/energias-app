@@ -9,7 +9,7 @@
 
     <div class="container mx-auto px-4 py-4">
       <div class="sm:flex sm:-mx-2 sm:flex-wrap">
-        <div class="flex items-center px-2 sm:w-full md:w-1/2 lg:w-1/3 mb-3">
+        <div class="flex items-center px-2 sm:w-full md:w-1/2 lg:w-1/2 mb-3">
           <router-link
             :to="{name: 'panels'}"
             tag="div"
@@ -20,7 +20,7 @@
                 src="@/assets/images/panels.png"
                 class="mx-auto"
                 width="200"
-                alt="Sunset in the mountains"
+                alt="Paneles"
               />
             </a>
             <div class="px-6 py-4 text-center">
@@ -29,7 +29,7 @@
             </div>
           </router-link>
         </div>
-        <div class="flex items-center px-2 sm:w-full md:w-1/2 lg:w-1/3 mb-3">
+        <!-- <div class="flex items-center px-2 sm:w-full md:w-1/2 lg:w-1/3 mb-3">
           <router-link
             :to="{name: 'demand'}"
             tag="div"
@@ -48,8 +48,8 @@
               <p class="text-gray-700 text-base">Determine la demanda máxima para una instalación</p>
             </div>
           </router-link>
-        </div>
-        <div class="flex items-center px-2 sm:w-full lg:w-1/3 mb-3">
+        </div> -->
+        <div class="flex items-center px-2 sm:w-1/2 lg:w-1/2 mb-3">
           <router-link
             :to="{name: 'cables'}"
             tag="div"
@@ -60,7 +60,7 @@
                 src="@/assets/images/cables.png"
                 class="mx-auto"
                 width="200"
-                alt="Sunset in the mountains"
+                alt="Cables"
               />
             </a>
             <div class="px-6 py-4 text-center">

@@ -1,6 +1,8 @@
 import Home from '@/components/Home';
 import Cables from '@/components/Cables';
 import Demand from '@/components/Demand';
+import DemandBuildings from '@/components/DemandBuildings';
+import DemandPublic from '@/components/DemandPublic';
 import Panels from '@/components/Panels';
 
 export const routes = [
@@ -13,6 +15,16 @@ export const routes = [
     path: '/demanda',
     name: 'demand',
     component: Demand
+  },
+  {
+    path: '/demanda/edificios',
+    name: 'edificios',
+    component: DemandBuildings
+  },
+  {
+    path: '/demanda/publicos',
+    name: 'publicos',
+    component: DemandPublic
   },
   {
     path: '/cables',
