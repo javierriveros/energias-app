@@ -310,8 +310,8 @@ export default {
       }
     },
     getVoltaje () {
-      // return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 120 : 208; // Colombia
-      return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 220 : 380; // Europa
+      return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 120 : 208; // Colombia
+      // return parseInt(this.sistema) == 1 || parseInt(this.sistema) == 3 ? 220 : 380; // Europa
     },
     getFa () {
       return this.tabla59[this.tubosVerticales - 1][this.tubosHorizontales - 1];

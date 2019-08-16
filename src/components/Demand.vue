@@ -11,11 +11,11 @@
       <h2 class="text-center">Determinación de la demanda máxima en instalaciones domiciliarias (viviendas unifamiliares)</h2>
       <div class="flex justify-center items-center py-4">
         <button
-          @click="toggleIsGivenInstalledPower"
+          @click="showIsGivenInstalledPower"
           class="bg-gray-300 mr-3 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg inline-flex items-center focus:outline-none focus:shadow-outline"
         >Quiero dar los valores</button>
         <button
-          @click="toggleIsGivenInstalledPower"
+          @click="hideIsGivenInstalledPower"
           class="bg-blue-300 mr-3 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center focus:outline-none focus:shadow-outline"
         >Quiero calcular las potencias</button>
         <router-link
@@ -460,8 +460,11 @@ export default {
         filteredTable.fluorLighting :
         filteredTable.lighting;
     },
-    toggleIsGivenInstalledPower () {
-      this.isGivenInstalledPower = !this.isGivenInstalledPower;
+    showIsGivenInstalledPower () {
+      this.isGivenInstalledPower = true;
+    },
+    hideIsGivenInstalledPower () {
+      this.isGivenInstalledPower = false;
     },
     addRoom () {
       let checkEmptyrooms = this.rooms.filter(
