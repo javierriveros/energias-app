@@ -127,8 +127,8 @@
                   class="form-select block w-full mt-1"
                   v-model="aislante"
                 >
-                  <option value="1">PVC - PET (mal cable)</option>
-                  <option value="2">EPR - XLPE (buen cable)</option>
+                  <option value="1">PVC - PET</option>
+                  <option value="2">EPR - XLPE</option>
                 </select>
               </label>
             </div>

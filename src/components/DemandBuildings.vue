@@ -11,13 +11,12 @@
       <h2 class="text-center">Determinación de la demanda máxima simultánea correspondiente a un edificio destinado principalmente a viviendas</h2>
       <div class="flex justify-center items-center py-4">
         <button
-          @click.prevent="showIsGivenInstalledPower"
+          @click="toggleIsGivenInstalledPower"
           class="bg-gray-300 mr-3 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg inline-flex items-center focus:outline-none focus:shadow-outline"
-        >Quiero dar los valores</button>
-        <button
-          @click.prevent="hideIsGivenInstalledPower"
-          class="bg-blue-300 mr-3 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center focus:outline-none focus:shadow-outline"
-        >Quiero calcular las potencias</button>
+        >
+          <span v-if="isGivenInstalledPower">Quiero calcular las potencias</span>
+          <span v-else>Quiero dar los valores</span>
+        </button>
         <router-link
           :to="{name: 'demand'}"
           title="Demanda para edificios"
@@ -470,11 +469,8 @@ export default {
         return this.table11[2];
       }
     },
-    showIsGivenInstalledPower () {
-      this.isGivenInstalledPower = true;
-    },
-    hideIsGivenInstalledPower () {
-      this.isGivenInstalledPower = false;
+    toggleIsGivenInstalledPower () {
+      this.isGivenInstalledPower = !this.isGivenInstalledPower;
     },
     addDepartment () {
       let checkEmptydepartments = this.departments.filter(
